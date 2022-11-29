@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        // player choice 
+        const playerSelection = prompt("Rock, Paper or Scissors?");
+        // alert(`You chose ${playerSelection}`);
+
+        console.log("You chose " + playerSelection);
+
+
+        // computers choice
+        const choice = ["Rock", "Paper", "Scissors"];
+        
+        function getComputerChoice(choice) {
+            return choice[Math.floor(Math.random() * choice.length)];
+
+        }
+
+        const computerSelection = getComputerChoice(choice);
+
+        console.log("Computer chose " + computerSelection);
+        // alert(`Computer chose ${computerSelection}`);
+
+
+        // if else statement that decides who wins the round
+        function playRound(computerSelection ,playerSelection) {
+            if (playerSelection == computerSelection) {
+                console.log("Tie!");
+            } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
+                console.log(playerSelection + " Can you smell what 'The Rock' is cookin'!");
+            } else if (playerSelection == "Paper" && computerSelection == "Rock") {
+                console.log(playerSelection + " Paperboy, Paperboy, All about some Paperboy!");
+            } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+                console.log(playerSelection + " Roger Federer'd that Paper.");
+            } else if (computerSelection == "Rock" && playerSelection == "Scissors") {
+                console.log("OOF! Rock beats Scissors, Bruv");
+            } else if (computerSelection == "Paper" && playerSelection == "Rock") {
+                console.log("OOF, mannnnn comeon Rock can't beat the paper boy!");
+            } else if (computerSelection == "Scissors" && playerSelection == "Paper") {
+                console.log("Sorry, Scissors slice straight through paper!");
+            } else {
+                console.log("Uh oh somethings not working correctly");
+            }
+
+        }
+    
+        // const computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+        // alert(`Computer chose ${computerSelection}`);
+
+
+
+        // // once round winner is decided round is over and winner is selected
+        // function game() {
+        //     for (playRound() = 0; playRound() <= 5; playRound()++) {
+
+        //     }
+
+        // }
+
+
+        /*
+        // ties
+        * Rock and Rock 
+        * Paper and Paper
+        * Scissors and Scissors
+
+        // wins
+        * Rock beats Scissors
+        * Paper beats Rock 
+        * Scissors beats Paper
+
+        // loses
+        * Scissors loses to Rock
+        * Rock loses to Paper
+        * Paper loses to Scissors
+        */
+    </script>
+    
+</body>
+</html>
