@@ -7,83 +7,131 @@
     <title>Document</title>
 </head>
 <body>
+
+    <div id="container">
+        <button id="Rock">Rock</button>
+        <button id="Paper">Paper</button>
+        <button id="Scissors">Scissors</button>
+    </div>
+
+    <div class="results">
+        Results
+    </div>
+
     <script>
-
-
-        // player choice 
-        const playerSelection = prompt("Rock, Paper or Scissors?");
-        // alert(`You chose ${playerSelection}`);
-
-        console.log("You chose " + playerSelection);
-
-
-        // computers choice
+    
+         // computer choice function
         const choice = ["Rock", "Paper", "Scissors"];
-        
         function getComputerChoice(choice) {
             return choice[Math.floor(Math.random() * choice.length)];
-
         }
 
         const computerSelection = getComputerChoice(choice);
+        
 
-        console.log("Computer chose " + computerSelection);
-        // alert(`Computer chose ${computerSelection}`);
-
+        // intitializes play and computer score
         let playerScore = 0;
         let computerScore = 0;
-        
-        // if else statement that decides who wins the round
-        function playRound(computerSelection ,playerSelection) {
-            if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
+         // if else statement that decides who wins the round
+         function playRound(playerSelection ,computerSelection) {
+
+            if (playerSelection == computerSelection) {
                 console.log("Tie!");
-            } else if (playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "scissors") {
+            } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
+                console.log("Can you smell what 'The Rock' is cookin'!");
                 return playerScore;
-                console.log(playerSelection + " Can you smell what 'The Rock' is cookin'!");
-            } else if (playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "rock") {
+            } else if (playerSelection == "Paper" && computerSelection == "Rock") {
+                console.log("Paperboy, Paperboy, All about some Paperboy!");
                 return playerScore;
-                console.log(playerSelection + " Paperboy, Paperboy, All about some Paperboy!");
-            } else if (playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "paper") {
+            } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+                console.log("Roger Federer'd that Paper.");
                 return playerScore;
-                console.log(playerSelection + " Roger Federer'd that Paper.");
-            } else if (computerSelection.toLowerCase() == "rock" && playerSelection.toLowerCase() == "scissors") {
-                return computerScore;
-                console.log("OOF! Rock beats Scissors, Bruv");
-            } else if (computerSelection.toLowerCase() == "paper" && playerSelection.toLowerCase() == "rock") {
-                return computerScore;
-                console.log("OOF, mannnnn comeon Rock can't beat the paper boy!");
-            } else if (computerSelection.toLowerCase() == "scissors" && playerSelection.toLowerCase() == "paper") {
-                return computerScore;
-                console.log("Sorry, Scissors slice straight through paper!");
             } else {
-                console.log("Uh oh somethings not working correctly");
+                console.log("Computer wins");
+                return computerScore;
             }
 
         }
+
+        const rock = document.getElementById('Rock');
+        const paper = document.getElementById('Paper');
+        const scissors = document.getElementById('Scissors');
+
+        rock.addEventListener('click', () => {
+            let playerSelection = "Rock";
+            console.log(playerSelection);
+            console.log(computerSelection);
+            playRound(playerSelection, computerSelection);
+            
+        });
+           
+
+        paper.addEventListener('click', () => {
+            let playerSelection = "Paper";
+            console.log(playerSelection);
+            console.log(computerSelection);
+            playRound(playerSelection, computerSelection);
+        
+        });
+        
+        
+        scissors.addEventListener('click', () => {
+            let playerSelection = "Scissors";
+            console.log(playerSelection);
+            console.log(computerSelection);
+            playRound(playerSelection, computerSelection);
+        });
+        
     
-        // prints results of round 
-        console.log(playRound(playerSelection, computerSelection));
-        // alert(`Computer chose ${computerSelection}`);
+        
 
-        // // once round winner is decided round is over and winner is selected
-        // need to place functions insde of game function that 
-        function game() {
-              for (playRound(playerSelection, computerSelection) == 0; playRound(playerSelection, computerSelection) <= 5; playRound(playerSelection, computerSelection)++) {
-                if (playerScore > computerScore) {
-                    return "winner";
-                    console.log("You won man");
 
-                } else if (computerScore == playerScore) {
-                    return "tie";
-                    console.log("Tie game man, Step it into gear, we're going into overtime!")
-                } else {
-                    return "Damn";
 
-                }
-            }
-        }
+        // play.forEach((button) => {
+        //     play.addEventListener('click', () => {
+        //         playRound(playerSelection);
+                
+        //     });
+        // });
+
+
+         // calls computer choice function
+        //  const computerSelection = getComputerChoice(choice);
+        //  console.log("Computer chose " + computerSelection);
+
+
+
+        //  const results = document.getElementById('results');
+         
+
+        // unused for not taking purposes
+        // // buttons variable acts as a node list. It looks and acts much like an array
+        // const buttons = document.querySelectorAll('button');
+        
+        // // use the .forEach method to iterate through each button
+        // buttons.forEach((button) => {
+        //     // and for each one we add a 'click' listener
+        //     button.addEventListener('click', playRound);
+        //     alert(button.id);
+        //     console.log(e);
+        //     });
+        
+        //       for (playRound(playerSelection, computerSelection) == 0; playRound(playerSelection, computerSelection) <= 5; playRound(playerSelection, computerSelection)++) {
+        //         if (playerScore > computerScore) {
+        //             return "winner";
+        //             console.log("You won man");
+
+        //         } else if (computerScore == playerScore) {
+        //             return "tie";
+        //             console.log("Tie game man, Step it into gear, we're going into overtime!")
+        //         } else {
+        //             return "Damn";
+
+        //         }
+        //     }
+        // }
     
-        console.log(game());
+        // console.log(game());
         /*
         // ties
         * Rock and Rock 
