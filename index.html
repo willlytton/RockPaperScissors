@@ -6,149 +6,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
 
-    <div id="container">
-        <button id="Rock">Rock</button>
-        <button id="Paper">Paper</button>
-        <button id="Scissors">Scissors</button>
+    <div class="container">
+        <button value="rock">Rock</button>
+        <button value="paper">Paper</button>
+        <button value="scissors">Scissors</button>
     </div>
 
     <div class="results">
-        Results
+        <p class="toggle active"></p>
+        <div class="selection toggle">Selection:
+            <p></p>
+            <p></p>
+        </div>
+        <p class="toggle" id="matchResults"></p>
+
+        <div class="score">
+            <p>Player Score: <span id="playerScore">0</span></p>
+            <p>Computer Score: <span id="computerScore">0</span></p>
+        </div>
+
+        <p class="toggle" id="matchWinner"></p>
+
+
     </div>
 
     <script>
+        let matchResults = '';
+        // intitializes play and computer score
+
+        let playerScore = 0;
+        let computerScore = 0;
     
-         // computer choice function
-        const choice = ["Rock", "Paper", "Scissors"];
+        // generates computers choice
         function getComputerChoice(choice) {
+            choice = ["rock", "paper", "scissors"];
             return choice[Math.floor(Math.random() * choice.length)];
         }
 
-        const computerSelection = getComputerChoice(choice);
-        
 
-        // intitializes play and computer score
-        let playerScore = 0;
-        let computerScore = 0;
-         // if else statement that decides who wins the round
-         function playRound(playerSelection ,computerSelection) {
-
+        // logic that console logs the winner
+        function playRound(playerSelection ,computerSelection) {
             if (playerSelection == computerSelection) {
-                console.log("Tie!");
-            } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
-                console.log("Can you smell what 'The Rock' is cookin'!");
-                return playerScore;
-            } else if (playerSelection == "Paper" && computerSelection == "Rock") {
-                console.log("Paperboy, Paperboy, All about some Paperboy!");
-                return playerScore;
-            } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
-                console.log("Roger Federer'd that Paper.");
-                return playerScore;
+                return "tie";
+            } else if (playerSelection == "rock" && computerSelection == "scissors") {
+                return "win";
+               
+            } else if (playerSelection == "paper" && computerSelection == "rock") {
+                return "win";
+               
+            } else if (playerSelection == "scissors" && computerSelection == "paper") {
+                return "win";
+                
             } else {
-                console.log("Computer wins");
-                return computerScore;
+                return "lose";     
             }
-
+            
         }
 
-        const rock = document.getElementById('Rock');
-        const paper = document.getElementById('Paper');
-        const scissors = document.getElementById('Scissors');
+        function displayScoreCard(matchResults, playerSelection, computerSelection) {
+ 
+            if (matchResults == "win") {
+                return "You won!";
 
-        rock.addEventListener('click', () => {
-            let playerSelection = "Rock";
-            console.log(playerSelection);
-            console.log(computerSelection);
-            playRound(playerSelection, computerSelection);
-            
-        });
-           
+            } else if (matchResults == "lose") {
+                return "You lost!";
 
-        paper.addEventListener('click', () => {
-            let playerSelection = "Paper";
-            console.log(playerSelection);
-            console.log(computerSelection);
-            playRound(playerSelection, computerSelection);
-        
-        });
-        
-        
-        scissors.addEventListener('click', () => {
-            let playerSelection = "Scissors";
-            console.log(playerSelection);
-            console.log(computerSelection);
-            playRound(playerSelection, computerSelection);
-        });
-        
+            } else if (matchResults == "tie") {
+                return "Tie game."
+            }
+        }
+
     
-        
+        function game() {
+            let playerSelection = "";
+            let computerSelection = "";
 
+            if (playerScore < 5 && computerScore < 5) {
 
+                playerSelection = this.value.toLowerCase();
+                computerSelection = getComputerChoice();
 
-        // play.forEach((button) => {
-        //     play.addEventListener('click', () => {
-        //         playRound(playerSelection);
+                matchResults = playRound(playerSelection, computerSelection);
                 
-        //     });
-        // });
+                if (matchResults == "win") {
+                    playerScore++;
+                } else if (matchResults == "lose") {
+                    computerScore++;
 
+                } else if (matchResults == "tie") {
+                    matchResults = "tie";
+                }
 
-         // calls computer choice function
-        //  const computerSelection = getComputerChoice(choice);
-        //  console.log("Computer chose " + computerSelection);
+                 // logs who is winner 
+                resultsToScreen(matchResults, playerSelection, computerSelection, playerScore, computerScore);
 
+                if (playerScore == 5 || computerScore == 5) {
+                    // displays winner
+                    finalWinner();
 
+                } 
+            }  
+        }
 
-        //  const results = document.getElementById('results');
-         
+    // ----------------------- UI ---------------------------- //
 
-        // unused for not taking purposes
-        // // buttons variable acts as a node list. It looks and acts much like an array
-        // const buttons = document.querySelectorAll('button');
-        
-        // // use the .forEach method to iterate through each button
-        // buttons.forEach((button) => {
-        //     // and for each one we add a 'click' listener
-        //     button.addEventListener('click', playRound);
-        //     alert(button.id);
-        //     console.log(e);
-        //     });
-        
-        //       for (playRound(playerSelection, computerSelection) == 0; playRound(playerSelection, computerSelection) <= 5; playRound(playerSelection, computerSelection)++) {
-        //         if (playerScore > computerScore) {
-        //             return "winner";
-        //             console.log("You won man");
+        // const body = document.querySelector('body');
+        // const results = document.getElementsByClassName('results');
+        const results = document.querySelector('.results');
+        const selection = document.querySelector('.selection');
+        const matchText = document.getElementById('matchResults');
+        const displayPlayerScore = document.getElementById('playerScore');
+        const displayComputerScore = document.getElementById('computerScore');
+        const matchWinner = document.getElementById('matchWinner');
 
-        //         } else if (computerScore == playerScore) {
-        //             return "tie";
-        //             console.log("Tie game man, Step it into gear, we're going into overtime!")
-        //         } else {
-        //             return "Damn";
+        const gameButtons = document.querySelectorAll('.container button');
+        gameButtons.forEach(button => button.addEventListener('click', game));
 
-        //         }
-        //     }
-        // }
+        // prints results to display
+        function resultsToScreen(matchResults, playerSelection, computerSelection, playerScore, computerScore) {
+
+            if (!matchText.classList.contains('active')) {
+
+                results.firstElementChild.classList.toggle('active');
+                selection.classList.toggle('active');
+                matchText.classList.toggle('active');
+            }
+
+            selection.firstElementChild.textContent = playerSelection;
+            selection.lastElementChild.textContent = computerSelection;
+            matchText.textContent = displayScoreCard(matchResults, playerSelection, computerSelection);
+            displayPlayerScore.textContent = playerScore;
+            displayComputerScore.textContent = computerScore;
     
-        // console.log(game());
-        /*
-        // ties
-        * Rock and Rock 
-        * Paper and Paper
-        * Scissors and Scissors
+        }
 
-        // wins
-        * Rock beats Scissors
-        * Paper beats Rock 
-        * Scissors beats Paper
 
-        // loses
-        * Scissors loses to Rock
-        * Rock loses to Paper
-        * Paper loses to Scissors
-        */
+        function finalWinner() {
+            if (playerScore > computerScore) {
+                matchWinner.textContent = "You won the match!";
+
+            } else {
+                matchWinner.textContent = "Computer wins!";
+
+            }
+        }
+        
     </script>
-    
 </body>
 </html>
